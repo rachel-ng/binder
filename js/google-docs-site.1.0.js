@@ -22,8 +22,25 @@ $(function() {
         		var item = $('<li class="menu-item">');
 
         		item.addClass(urlsafe);
-        		item.html('<a href="#'+ property +'">'+property+'</a>');
-        		item.appendTo(links);
+
+				if (typeof data.menu[property] == "object") {
+					switch (true) {
+						case "link" in data.menu[property]:
+							item.html(`&emsp;<a href="${data.menu[property]["link"]}" target="_blank" rel="noopener noreferrer">${property} ⇢</a>`);
+							break;
+						case "copy" in data.menu[property]:
+							item.html(`&emsp;&emsp; &emsp; <a onclick="copyContent('${data.menu[property]["file"]}')">${data.menu[property]["prefix"] || ''}${property}</a>`);
+							break;
+						default: 
+							item.html(`<a href="#${property}">${property}</a>`);
+							break;
+					}
+				}
+				else {
+					item.html(`<a href="#${property}">${property}</a>`);
+				}
+    
+				item.appendTo(links);
 
         		//tmp
         		var bk = data.menu[property];

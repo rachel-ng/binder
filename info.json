@@ -8,6 +8,9 @@
 		"Download" : "https://docs.google.com/document/d/1aKVEphpLq3UUBkhoStJVhmkiOWRQmALAj-bphbk-KTU/",
 		"Binder In-Use" : "https://docs.google.com/document/d/1q9957u3P0SfFzwTzaWlu1ZeJ4FEZ0H4MF-cJBSm4Y-s/",
 		"Google Slides" : "https://docs.google.com/presentation/d/1gdX17MpgdyhiAQKTPehMWEYf914cYF4GtuY7m1jD7Qo/embed?start=true&loop=true&delayms=5000",
+		"Calendar" : {
+			"link": "https://calendar.google.com/calendar/r/month"
+		}, 
 		"Tumblr" : "http://cempontraoryartdaily.tumblr.com/",
 		"PDF" : "https://isotropic.org/papers/chicken.pdf",
 		"Youtube" : "https://www.youtube.com/embed/2rP6TcIPUpE",
