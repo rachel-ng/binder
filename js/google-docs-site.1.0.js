@@ -44,6 +44,9 @@ $(function() {
 		var about = $('.about');
 		about.html(data.about);
 
+		var header = $('.header');
+		header.html(data.header);
+
 		//load the google doc
 		locationHashChanged();
 
