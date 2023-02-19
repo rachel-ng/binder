@@ -21,7 +21,19 @@ $(function() {
     			var urlsafe = property.replace(/ /gi, '-');
         		var item = $('<li class="menu-item">');
         		item.addClass(urlsafe);
-        		item.html('<a href="#'+ property +'">'+property+'</a>');
+				if (typeof data.menu[property] == "object") {
+					if ("link" in data.menu[property]) {
+						// 
+						item.html(`<a href="${data.menu[property]["link"]}" target="_blank" rel="noopener noreferrer"> ⤷ ${property}</a>`);
+					}
+					else if ("file" in data.menu[property]) {
+						// copy link to local file 
+						item.html(`<a onclick="copyContent('${data.menu[property]["file"]}')"> ⤷ 📁 ${property}</a>`);
+					}
+				}
+				else { 
+					item.html('<a href="#'+ property +'">'+property+'</a>');
+				}
         		item.appendTo(links);
         		//tmp
         		var bk = data.menu[property];
@@ -69,6 +81,16 @@ $(function() {
 	}
 
 });
+
+const copyContent = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      console.log('Content copied to clipboard');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  }
+
 
 function locationHashChanged() {
 	var item = window.location.hash;
