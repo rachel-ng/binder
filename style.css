@@ -33,7 +33,7 @@ body {
 	left: 1.5em;
 	top: 40%;
 	color: #ffffff;
-	font: 1.25em/1.5em monospace;
+	font: 1em/1.5em courier;
 	text-transform: lowercase;
 	letter-spacing: .025em;
 	z-index: 10;
@@ -42,13 +42,31 @@ body {
 	background-color: #fefefedd;
 }
 
-#logo {
-	z-index: 20;
+#greeting {
 	position: fixed;
-	right: 70px;
-	top: 60px;
+	z-index: 20;
+	max-width: 300px;
+	right: 7.5%;
+	top: 15%;
+	font: 1em courier;
+	letter-spacing: .025em;
+}
+
+#greeting .header {
+	font: 2em courier;
+	text-align: right;
+}
+
+.about { 
+	color: #000000ee;
+	text-decoration: none;
+	padding: 1em 0.25em;
+}
+
+#logo {
 	width: 300px;
 }
+
 #logo-touch {
 	display: none;
 	position: absolute;
@@ -77,14 +95,13 @@ body {
 #navigation li{
 	padding: 0;
 	margin: 0;
-	width: auto;
+	width: max-content;
 }
 
-#navigation a, div.about{
+#navigation a{
 	color: #717171;
 	text-decoration: none;
 	padding: 0.25em;
-	margin-right: 0.5em; 
 }
 #navigation a.active{
 	color: #000000;
@@ -97,46 +114,35 @@ body {
 	color: red;
 }
 
-.about{
-	position: fixed;
-	font-family: courier;
-	letter-spacing: .02em;
-	font-size: 14px;
-	line-height: 19px;
-	z-index: 100;
-	color: rgba(0, 0.8);
-	z-index: 90;
-	max-width: 277px;
-	right: 145px;
-	top: 155px;
-}
-
 /* Psuedo mobile styles for wide touch devices */
 .touch-device #menu {
 	position: fixed;
-	font: 1.25em/1.5em monospace;
-	padding: 10px;
+	font: 1em/1.5em monospace;
+	padding: 1em;
 	z-index: 10;
 	left: 2px;
 	right: 2px;
 	top: 2px;
+	background: none;
 	cursor: pointer;
 }
 
-.touch-device #logo{
+.touch-device #logo,
+.touch-device .header,
+.touch-device #binder-clip {
 	display: none;
+}
+.touch-device .about{
+	display: none;
+	width: auto;
 }
 .touch-device #logo-touch{
 	display: block;
 }
-.touch-device #binder-clip{
-	display: none;
-}
+
 .touch-device #navigation{
 	display: none;
-	text-indent: -1.5em;
-	margin-left: 1.5em;
-	margin-top: 20px;
+	background-color: #ffffffdd;
 }
 .touch-device #menu-open{
 	width: 30px;
@@ -148,10 +154,6 @@ body {
 	height: 15%;
 	margin-bottom: 15%;
 	width: 90%;
-}
-.touch-device .about{
-	width: auto;
-	display: none;
 }
 
 /* Real mobile styles for smaller screens */
@@ -172,32 +174,25 @@ body {
 	}
 
 	#menu {
+		background: none;
 		position: fixed;
-		font: 1.25em/1.5em;
 		padding: 1em;
 		z-index: 10;
-		left: 2px;
-		right: 2px;
-		top: 2px;
 		cursor: pointer; 
 	}
 
-	#logo{
+	#logo, .header, #binder-clip{
 		display: none;
 	}
 	#logo-touch {
 		display: block;
 	}
-
-	#binder-clip{
-		display: none;
-	}
 	
 	#navigation{
 		display: none;
-		text-indent: -1.5em;
-		margin-left: 1.5em; 
+		padding: 0.5em;
 		margin-top: 1em;
+		background-color: #ffffffdd;
 	}
 
 	#menu-open{
