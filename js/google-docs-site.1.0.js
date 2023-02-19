@@ -20,13 +20,19 @@ $(function() {
     		if (data.menu.hasOwnProperty(property)) {
     			var urlsafe = property.replace(/ /gi, '-');
         		var item = $('<li class="menu-item">');
+
         		item.addClass(urlsafe);
         		item.html('<a href="#'+ property +'">'+property+'</a>');
         		item.appendTo(links);
+
         		//tmp
         		var bk = data.menu[property];
     		}
 		}
+
+		//create the header
+		var header = $('.header');
+		header.html(data.header);
 
 		//create the about section
 		var about = $('.about');
