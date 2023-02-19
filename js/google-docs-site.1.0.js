@@ -23,12 +23,12 @@ $(function() {
         		item.addClass(urlsafe);
 				if (typeof data.menu[property] == "object") {
 					if ("link" in data.menu[property]) {
-						// 
-						item.html(`<a href="${data.menu[property]["link"]}" target="_blank" rel="noopener noreferrer"> ⤷ ${property}</a>`);
+						// open link in new tab
+						item.html(`&emsp;<a href="${data.menu[property]["link"]}" target="_blank" rel="noopener noreferrer"> ⤷ ${property}</a>`);
 					}
-					else if ("file" in data.menu[property]) {
-						// copy link to local file 
-						item.html(`<a onclick="copyContent('${data.menu[property]["file"]}')"> ⤷ 📁 ${property}</a>`);
+					else if ("copy" in data.menu[property]) {
+						// copy content to clipboard
+						item.html(`&emsp;&emsp; &emsp; <a onclick="copyContent('${data.menu[property]["file"]}')">${data.menu[property]["prefix"] || ''}${property}</a>`);
 					}
 				}
 				else { 
@@ -36,7 +36,7 @@ $(function() {
 				}
         		item.appendTo(links);
         		//tmp
-        		var bk = data.menu[property];
+				var bk = data.menu[property];
     		}
 		}
 
