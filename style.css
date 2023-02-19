@@ -47,8 +47,9 @@ body {
     cursor: move;
     box-shadow: #ffffff 3px 3px 0, 6px 6px 0px #8a99aa;
     border-style: solid;
-    border-color: blue;
-    background-color: #eeeeeeee;
+    border-color: #2a4c88; 
+    /* border-color: blue; */
+    background-color: #fffffff9;
 }
 
 #logo {
