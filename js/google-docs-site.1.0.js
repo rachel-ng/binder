@@ -20,32 +20,47 @@ $(function() {
     		if (data.menu.hasOwnProperty(property)) {
     			var urlsafe = property.replace(/ /gi, '-');
         		var item = $('<li class="menu-item">');
+
         		item.addClass(urlsafe);
+				let code = "";
+
 				if (typeof data.menu[property] == "object") {
-					if ("link" in data.menu[property]) {
-						// open link in new tab
-						item.html(`&emsp;<a href="${data.menu[property]["link"]}" target="_blank" rel="noopener noreferrer"> ⤷ ${property}</a>`);
-					}
-					else if ("copy" in data.menu[property]) {
-						// copy content to clipboard
-						item.html(`&emsp;&emsp; &emsp; <a onclick="copyContent('${data.menu[property]["file"]}')">${data.menu[property]["prefix"] || ''}${property}</a>`);
+					switch (true) {
+						case "link" in data.menu[property]:
+							code = `<a href="${data.menu[property]["link"]}" target="_blank" rel="noopener noreferrer">${data.menu[property]["prefix"] || ''}${property}${data.menu[property]["postfix"] || ''} ⇢</a>`; 
+							item.html();
+							break;
+						case "copy" in data.menu[property]:
+							code = `<a onclick="copyContent('${data.menu[property]["copy"]}')">${data.menu[property]["prefix"] || ''}${property}${data.menu[property]["postfix"] || ''}</a>`;
+							break;
+						default: 
+							code = `<a href="#${property}">${data.menu[property]["prefix"] || ''}${property}${data.menu[property]["postfix"] || ''}</a>`;
+							break;
 					}
 				}
-				else { 
-					item.html('<a href="#'+ property +'">'+property+'</a>');
+				else {
+					code = `<a href="#${property}">${property}</a>`;
 				}
-        		item.appendTo(links);
+
+				if (typeof data.menu[property] == "object" && "small" in data.menu[property]) {
+					code = `<sub>${code}</sub>`
+				}
+
+				item.html(code); 	
+				item.appendTo(links);
+
         		//tmp
-				var bk = data.menu[property];
+        		var bk = data.menu[property];
     		}
 		}
+
+		//create the header
+		var header = $('.header');
+		header.html(data.header);
 
 		//create the about section
 		var about = $('.about');
 		about.html(data.about);
-
-		var header = $('.header');
-		header.html(data.header);
 
 		//load the google doc
 		locationHashChanged();
@@ -63,7 +78,7 @@ $(function() {
     // and reset it gracefully when transitioning to narrower views
     // 768 matches the CSS mobile breakpoint, if you change it here
     // change it in the CSS as well. Thanks!
-    //
+    //          
     // N.B. If touch-punch is imported, this doesn't prevent moving the menu
     // around on touch devices. If you don't like that remove touch-punch.
     $(window).resize(function() {
@@ -92,8 +107,7 @@ const copyContent = async (text) => {
     } catch (err) {
       console.error('Failed to copy: ', err);
     }
-  }
-
+}
 
 function locationHashChanged() {
 	var item = window.location.hash;

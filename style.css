@@ -1,240 +1,220 @@
-/*
-Binder
-Author: Clement Valla
-Version: 1.0
-*/
-
 *{
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
+
 html {
-    width: 100%;
-    height: 100%;
+	width: 100%;
+	height: 100%;
 }
 
 body {
-    position: relative;
-    width: 100%;
-    height: 100%;
+	position: relative;
+	width: 100%;
+	height: 100%;
 }
 
 #background-site {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index:1;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
 }
 
 #background-site iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    overflow: scroll;
+	width: 100%;
+	height: 100%;
+	border: none;
+	overflow: scroll;
 }
 
 #menu {
-    position: fixed;
-    left: 10px;
-    top: 40%;
-    color: white;
-    letter-spacing: .01em;
-    z-index:10;
-    padding: 13px;
-    padding-right: 15px;
-    font: 15px/20px monospace;
-    letter-spacing: -0.3px;
-    cursor: move;
-    box-shadow: #ffffff 3px 3px 0, 6px 6px 0px #8a99aa;
-    border-style: solid;
-    border-color: #2a4c88; 
-    /* border-color: blue; */
-    background-color: #fffffff9;
+	position: fixed;
+	left: 1.5em;
+	top: 40%;
+	color: #ffffff;
+	font: 1em/1.5em courier;
+	text-transform: lowercase;
+	letter-spacing: .025em;
+	z-index: 10;
+	padding: 1em 1.75em 1em 1em;
+	cursor: move;
+	background-color: #fefefedd;
+}
+
+#greeting {
+	position: fixed;
+	z-index: 20;
+	max-width: 300px;
+	right: 7.5%;
+	top: 15%;
+	font: 1em courier;
+	letter-spacing: .025em;
+}
+
+#greeting .header {
+	font: 2em courier;
+	text-align: right;
+}
+
+.about { 
+	color: #000000ee;
+	text-decoration: none;
+	padding: 1em 0.25em;
 }
 
 #logo {
-    z-index: 20;
-    position: fixed;
-    right: 70px;
-    top: 60px;
-    width: 300px;
+	width: 300px;
 }
 
 #logo-touch {
-    display: none;
-    position: absolute;
-    left: 50%;
-    top: 4px;
-    margin-left: -80px;
-    width: 160px;
-    margin-left: 10%;
+	display: none;
+	position: absolute;
+	left: 50%;
+	top: 4px;
+	width: 160px;
+	margin-left: 10%;
 }
 
 #binder-clip{
-    margin-top: -38px;
-    position: fixed;
-    margin-left: 80px;
-    z-index: 20;
-    -ms-transform: rotate(-27deg);
-    -webkit-transform: rotate(-27deg);
-    transform: rotate(-27deg);
+	margin-top: -2em;
+	position: fixed;
+	margin-left: 8em;
+	z-index: 20;
+	-ms-transform: rotate(-27deg);
+	-webkit-transform: rotate(-27deg);
+	transform: rotate(-27deg);
 }
 
 #navigation {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
+	color: #000000;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
 }
 
 #navigation li{
-    padding: 0;
-    margin: 0;
-    width: auto;
+	padding: 0;
+	margin: 0;
+	width: max-content;
 }
 
-#navigation a, div.about{
-    color: #717171;
-    padding: 0;
-    text-decoration: none;
-    text-transform: lowercase;
-    padding: 1px;
+#navigation a{
+	color: #717171;
+	text-decoration: none;
+	padding: 0.25em;
 }
 #navigation a.active{
-    color: #000;
+	color: #000000;
+	font-weight: bold;
+}
+#navigation a.active::before {
+	color: #000000;
+	font-weight: bold;
+    content: '⤷ ';
 }
 #navigation a:hover{
-    color: #000;
+	color: #000000;
 }
 #navigation .current_page_item a {
-    color: red;
-}
-
-
-.header{
-    position: fixed;
-    font-family: courier;
-    letter-spacing: 0.5px;
-    font-size: 4em;
-    z-index: 100;
-    color: rgba(0, 0.8);
-    z-index: 90;
-    max-width: 277px;
-    right: 145px;
-    top: 60px; 
-}
-
-.about{
-   position: fixed;
-   font-family: courier;
-   letter-spacing: 0.5px;
-   font-size: 14px;
-   line-height: 19px;
-   z-index: 100;
-   color: rgba(0, 0.8);
-   z-index: 90;
-   max-width: 277px;
-   right: 145px;
-   top: 155px;
+	color: red;
 }
 
 /* Psuedo mobile styles for wide touch devices */
-   .touch-device #menu {
-       position: fixed;
-       font-size: 16px;
-       line-height: 22px;
-       padding: 10px;
-       z-index:10;
-       left: 2px;
-       right: 2px;
-       top: 2px;
-   }
+.touch-device #menu {
+	position: fixed;
+	font: 1em/1.5em monospace;
+	padding: 1em;
+	z-index: 10;
+	left: 2px;
+	right: 2px;
+	top: 2px;
+	background: none;
+	cursor: pointer;
+}
 
-   .touch-device #logo{
-       display: none;
-   }
-   .touch-device #logo-touch{
-       display: block;
-   }
-   .touch-device #navigation{
-       display: none;
-       text-indent: -1.5em;
-       margin-left:1.5em;
-       margin-top: 20px;
-   }
-   .touch-device #menu-open{
-       width: 30px;
-       height: 35px;
-       cursor: pointer;
-   }
-   .touch-device #menu-open div {
-       background-color: black;
-       border: 1px solid black;
-       border-radius: 2px 2px 2px 2px;
-       height: 15%;
-       margin-bottom: 15%;
-       width: 90%;
-   }
-   .touch-device .about{
-       width: auto;
-       display: none;
-   }
+.touch-device #logo,
+.touch-device .header,
+.touch-device #binder-clip {
+	display: none;
+}
+.touch-device .about{
+	display: none;
+	width: auto;
+}
+.touch-device #logo-touch{
+	display: block;
+}
+
+.touch-device #navigation{
+	display: none;
+	background-color: #ffffffdd;
+}
+.touch-device #menu-open{
+	width: 30px;
+	height: 35px;
+	cursor: pointer;
+}
+.touch-device #menu-open div {
+	background-color: black;
+	height: 15%;
+	margin-bottom: 15%;
+	width: 90%;
+}
 
 /* Real mobile styles for smaller screens */
 @media only screen and (max-width: 768px) {
-   body, html{
-   position: relative;
-       width: 100%;
-   }
-   #background-site{
-       -webkit-overflow-scrolling:touch; 
-       overflow:auto;
-   }
-   #background-site iframe{
-       width: 100%;
-       height: 5500px;
-       overflow: hidden;
-   }
-   #menu {
-       position: fixed;
-       font-size: 16px;
-       line-height: 22px;
-       padding: 10px;
-       z-index:10;
-       left: 2px;
-       right: 2px;
-       top: 2px;
-   }
-   .header{
-       display: none; 
-   }
-   #logo{
-       display: none;
-   }
-   #logo-touch {
-       display: block;
-   }
-   #navigation{
-       display: none;
-       text-indent: -1.5em;
-       margin-left:1.5em; 
-       margin-top: 20px;
-   }
-   #menu-open{
-       width: 30px;
-       height: 35px;
-       cursor: pointer;
-   }
-   #menu-open div {
-       background-color: black;
-       border: 1px solid black;
-       border-radius: 2px 2px 2px 2px;
-       height: 15%;
-       margin-bottom: 15%;
-       width: 90%;
-   }
-   .about{
-       width: auto;
-       display: none;
-   }
+	body, html{
+		position: relative;
+		width: 100%;
+	}
+
+	#background-site{
+		-webkit-overflow-scrolling: touch; 
+		overflow: auto;
+	}
+	#background-site iframe{
+		width: 100%;
+		height: 5500px;
+		overflow: hidden;
+	}
+
+	#menu {
+		background: none;
+		position: fixed;
+		padding: 1em;
+		z-index: 10;
+		cursor: pointer; 
+	}
+
+	#logo, .header, #binder-clip{
+		display: none;
+	}
+	#logo-touch {
+		display: block;
+	}
+	
+	#navigation{
+		display: none;
+		padding: 0.5em;
+		margin-top: 1em;
+		background-color: #ffffffdd;
+	}
+
+	#menu-open{
+		width: 30px;
+		height: 35px;
+		cursor: pointer;
+	}
+	#menu-open div {
+		background-color: #000000;
+		height: 15%;
+		margin-bottom: 15%;
+		width: 90%;
+	}
+
+	.about{
+		width: auto;
+		display: none;
+	}
 }
-/* @end */
