@@ -27,14 +27,14 @@ $(function() {
 				if (typeof data.menu[property] == "object") {
 					switch (true) {
 						case "link" in data.menu[property]:
-							code = `<a href="${data.menu[property]["link"]}" target="_blank" rel="noopener noreferrer">${property} ⇢</a>`; 
+							code = `<a href="${data.menu[property]["link"]}" target="_blank" rel="noopener noreferrer">${data.menu[property]["prefix"] || ''}${property}${data.menu[property]["postfix"] || ''} ⇢</a>`; 
 							item.html();
 							break;
 						case "copy" in data.menu[property]:
-							code = `<a onclick="copyContent('${data.menu[property]["copy"]}')">${data.menu[property]["prefix"] || ''}${property}</a>`;
+							code = `<a onclick="copyContent('${data.menu[property]["copy"]}')">${data.menu[property]["prefix"] || ''}${property}${data.menu[property]["postfix"] || ''}</a>`;
 							break;
 						default: 
-							code = `<a href="#${property}">${property}</a>`;
+							code = `<a href="#${property}">${data.menu[property]["prefix"] || ''}${property}${data.menu[property]["postfix"] || ''}</a>`;
 							break;
 					}
 				}
@@ -78,7 +78,7 @@ $(function() {
     // and reset it gracefully when transitioning to narrower views
     // 768 matches the CSS mobile breakpoint, if you change it here
     // change it in the CSS as well. Thanks!
-    //
+    //          
     // N.B. If touch-punch is imported, this doesn't prevent moving the menu
     // around on touch devices. If you don't like that remove touch-punch.
     $(window).resize(function() {
