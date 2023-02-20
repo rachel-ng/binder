@@ -11,9 +11,18 @@
 		"Calendar" : {
 			"link": "https://calendar.google.com/calendar/r/month"
 		}, 
+		"hi": {
+			"copy": "hello world", 
+			"prefix": "&emsp;",
+			"small": true
+		}, 
 		"Tumblr" : "http://cempontraoryartdaily.tumblr.com/",
 		"PDF" : "https://isotropic.org/papers/chicken.pdf",
 		"Youtube" : "https://www.youtube.com/embed/2rP6TcIPUpE",
-		"Wikipedia" : "https://en.wikipedia.org/wiki/Web_page"
+		"Wikipedia" : "https://en.wikipedia.org/wiki/Web_page", 
+		"Binder": {
+			"link": "https://github.com/clementvalla/binder/", 
+			"small": true
+		}
 	}
 }

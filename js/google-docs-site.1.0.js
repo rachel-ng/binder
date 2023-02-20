@@ -22,24 +22,31 @@ $(function() {
         		var item = $('<li class="menu-item">');
 
         		item.addClass(urlsafe);
+				let code = "";
 
 				if (typeof data.menu[property] == "object") {
 					switch (true) {
 						case "link" in data.menu[property]:
-							item.html(`&emsp;<a href="${data.menu[property]["link"]}" target="_blank" rel="noopener noreferrer">${property} ⇢</a>`);
+							code = `<a href="${data.menu[property]["link"]}" target="_blank" rel="noopener noreferrer">${property} ⇢</a>`; 
+							item.html();
 							break;
 						case "copy" in data.menu[property]:
-							item.html(`&emsp;&emsp; &emsp; <a onclick="copyContent('${data.menu[property]["file"]}')">${data.menu[property]["prefix"] || ''}${property}</a>`);
+							code = `<a onclick="copyContent('${data.menu[property]["copy"]}')">${data.menu[property]["prefix"] || ''}${property}</a>`;
 							break;
 						default: 
-							item.html(`<a href="#${property}">${property}</a>`);
+							code = `<a href="#${property}">${property}</a>`;
 							break;
 					}
 				}
 				else {
-					item.html(`<a href="#${property}">${property}</a>`);
+					code = `<a href="#${property}">${property}</a>`;
 				}
-    
+
+				if (typeof data.menu[property] == "object" && "small" in data.menu[property]) {
+					code = `<sub>${code}</sub>`
+				}
+
+				item.html(code); 	
 				item.appendTo(links);
 
         		//tmp
@@ -92,6 +99,15 @@ $(function() {
 	}
 
 });
+
+const copyContent = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      console.log('Content copied to clipboard');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+}
 
 function locationHashChanged() {
 	var item = window.location.hash;
