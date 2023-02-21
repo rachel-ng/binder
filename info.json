@@ -19,8 +19,8 @@
         "PDF": "https://isotropic.org/papers/chicken.pdf",
         "Youtube": "https://www.youtube.com/embed/2rP6TcIPUpE",
         "Wikipedia": "https://en.wikipedia.org/wiki/Web_page",
-    "Binder": {
-        "link": "https://github.com/clementvalla/binder/",
+        "Binder": {
+            "link": "https://github.com/clementvalla/binder/",
             "small": true
         }
     }
