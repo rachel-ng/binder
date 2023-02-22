@@ -56,7 +56,7 @@ body {
 	text-align: right;
 }
 
-.about { 
+.about, .comment{ 
 	color: #000000ee;
 	text-decoration: none;
 	padding: 1em 0.25em;
@@ -138,7 +138,7 @@ body {
 .touch-device #greeting .header {
 	display: none;
 }
-.touch-device .about{
+.touch-device .about, .touch-device .comment {
 	display: none;
 	width: auto;
 }
@@ -213,7 +213,7 @@ body {
 		width: 90%;
 	}
 
-	.about{
+	.about, .comment{
 		width: auto;
 		display: none;
 	}

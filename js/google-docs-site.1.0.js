@@ -6,8 +6,10 @@ $(function() {
 	$.get( "info.json", function( data ) {
 
 		//did it load json data as string or as an object?
-		if (typeof data == "string")
-			data = $.parseJSON(data);
+		if (typeof data == "string") {
+      data = $.parseJSON(data);
+    }
+			
 
 		siteData = data;
 
@@ -32,7 +34,6 @@ $(function() {
               switch (true) {
                 case "link" in data.menu[property]:
                   code = `<a href="${data.menu[property]["link"]}" target="_blank" rel="noopener noreferrer">${prefix}${property}${postfix}</a>`; 
-                  item.html();
                   break;
 
                 case "copy" in data.menu[property]:
@@ -65,14 +66,23 @@ $(function() {
 		}
 
 		//create the header
-		var header = $('.header');
-		header.html(data.header);
-
-		//create the about section
-		var about = $('.about');
-		about.html(data.about);
+    var header = $('.header');
+    if (data.hasOwnProperty("header")) {
+      header.html(data.header);
+    }
+    else {
+      header.hide();
+    }
+    
+    //create the about section
+    var about = $('.about');
+    if (data.hasOwnProperty("about")) {
+      about.html(data.about);
+    }
+    else {
+      about.hide();
+    }
   
-
 		//load the google doc
 		locationHashChanged();
 
@@ -135,11 +145,13 @@ function locationHashChanged() {
       $('#backgrnd').attr('src', siteData.menu[item]);
     }
     
+    var comment = $('.comment');
     if ($.isPlainObject(siteData.menu[item]) && siteData.menu[item].hasOwnProperty("comment")) {
-          //create the about section
-		      var about = $('.about');
-		      about.html(siteData.menu[item]["comment"]);
+      comment.html(siteData.menu[item]["comment"]);
     } 
+    else {
+      comment.html("");
+    }
 		
 		var urlsafe = item.replace(/ /gi, '-');
 		$('.'+urlsafe+' a').addClass('active');
