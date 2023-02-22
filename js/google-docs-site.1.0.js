@@ -16,42 +16,52 @@ $(function() {
 		
 		//create the navigation
 		var links = $('#navigation');
+    
 		for (var property in data.menu) {
     		if (data.menu.hasOwnProperty(property)) {
     			var urlsafe = property.replace(/ /gi, '-');
-        		var item = $('<li class="menu-item">');
+        	var item = $('<li class="menu-item">');
 
-        		item.addClass(urlsafe);
-				let code = "";
+        	item.addClass(urlsafe);
+				  let code = "";
 
-				if (typeof data.menu[property] == "object") {
-					switch (true) {
-						case "link" in data.menu[property]:
-							code = `<a href="${data.menu[property]["link"]}" target="_blank" rel="noopener noreferrer">${data.menu[property]["prefix"] || ''}${property}${data.menu[property]["postfix"] || ''} ⇢</a>`; 
-							item.html();
-							break;
-						case "copy" in data.menu[property]:
-							code = `<a onclick="copyContent('${data.menu[property]["copy"]}')">${data.menu[property]["prefix"] || ''}${property}${data.menu[property]["postfix"] || ''}</a>`;
-							break;
-						default: 
-							code = `<a href="#${property}">${data.menu[property]["prefix"] || ''}${property}${data.menu[property]["postfix"] || ''}</a>`;
-							break;
-					}
-				}
-				else {
-					code = `<a href="#${property}">${property}</a>`;
-				}
+          if (typeof data.menu[property] == "object") {
+              let prefix = data.menu[property]["prefix"] || '';
+              let postfix = data.menu[property]["postfix"] || '';
 
-				if (typeof data.menu[property] == "object" && "small" in data.menu[property]) {
-					code = `<sub>${code}</sub>`
-				}
+              switch (true) {
+                case "link" in data.menu[property]:
+                  code = `<a href="${data.menu[property]["link"]}" target="_blank" rel="noopener noreferrer">${prefix}${property}${postfix}</a>`; 
+                  item.html();
+                  break;
 
-				item.html(code); 	
-				item.appendTo(links);
+                case "copy" in data.menu[property]:
+                  code = `<a onclick="copyContent('${data.menu[property]["copy"]}')">${prefix}${property}${postfix}</a>`;
+                  break;
 
-        		//tmp
-        		var bk = data.menu[property];
-    		}
+                case "embed" in data.menu[property]:
+                  code = `<a href="#${property}">${prefix}${property}${postfix}</a>`;
+                  break;
+
+                default: 
+                  code = `<a href="#${property}">${prefix}${property}${postfix}</a>`;
+                  break;
+              }
+          }
+          else {
+            code = `<a href="#${property}">${property}</a>`;
+          }
+
+          if (typeof data.menu[property] == "object" && "small" in data.menu[property]) {
+            code = `<small>${code}</small>`
+          }
+
+          item.html(code); 	
+          item.appendTo(links);
+
+          //tmp
+          var bk = data.menu[property];
+        }
 		}
 
 		//create the header
@@ -61,6 +71,7 @@ $(function() {
 		//create the about section
 		var about = $('.about');
 		about.html(data.about);
+  
 
 		//load the google doc
 		locationHashChanged();
@@ -112,11 +123,24 @@ const copyContent = async (text) => {
 function locationHashChanged() {
 	var item = window.location.hash;
 	item = item.replace('#','');
-	item = decodeURI(item);//thanks Eran! 
+	item = decodeURI(item); 
 	$('li a').removeClass('active');
 
 	if (siteData.menu.hasOwnProperty(item)){
-		$('#backgrnd').attr('src', siteData.menu[item]);
+    // embed with object 
+    if ($.isPlainObject(siteData.menu[item]) && siteData.menu[item].hasOwnProperty("embed")) {
+      $('#backgrnd').attr('src', siteData.menu[item]["embed"]);
+    } 
+    else {
+      $('#backgrnd').attr('src', siteData.menu[item]);
+    }
+    
+    if ($.isPlainObject(siteData.menu[item]) && siteData.menu[item].hasOwnProperty("comment")) {
+          //create the about section
+		      var about = $('.about');
+		      about.html(siteData.menu[item]["comment"]);
+    } 
+		
 		var urlsafe = item.replace(/ /gi, '-');
 		$('.'+urlsafe+' a').addClass('active');
 	} else {

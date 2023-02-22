@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: 1em courier, monospace;
+}
+
+.header {
+  font-size: 3em;
+}
+
+.footer {
+  margin: 4em auto 2em auto;
+  font-size: 0.75em;
+  width: max-content;
+}
+
+.footer a {
+  text-decoration: none; 
+  color: #333333;
+  margin: 0 1em;
+}
+
+.content {
+  margin: 2em auto 3em auto;
+  width: 60%;
+  height: max-content;
+}
+
+
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+/* Real mobile styles for smaller screens */
+@media only screen and (max-width: 768px) {
+	.content{
+		width: 80%;
+	}
+}
